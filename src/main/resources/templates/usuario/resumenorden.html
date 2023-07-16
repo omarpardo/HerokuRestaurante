@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>RESTAURANTE SARITA</title>
+
+
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<div th:include="usuario/template_usuario.html::header"></div>
+
+	<!-- Page Content -->
+	<div class="container">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			Resumen de la orden<small></small>
+		</h1>
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item active">Orden</li>
+		</ol>
+		<form th:action="@{saveOrder}" method="post">
+			<!-- Blog Post -->
+			<div class="card mb-4">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-9">
+							<div class="card-body">
+								<h5 class="card-title">
+									DATOS DEL QUE REALIZO LA ORDEN
+								</h5>
+								<h6 th:text=" 'Nombre: '+ ${usuario.nombre}"> </h6>
+								<h6 th:text="'Correo: '+  ${usuario.email}"></h6>
+								<h6 th:text="'Dirección: '+ ${usuario.direccion}"></h6>
+								<h6 th:text="'Teléfono: '+ ${usuario.telefono}"></h6>
+								<br> </br>
+
+								<h5 class="card-title">
+									ELIJA SU MESA
+								</h5>
+								<div class="mb-3">
+									<label for="mesa" class="form-label"></label>
+									<select id="mesa" name="mesa">
+										<option value="" disabled selected hidden >Seleccione una mesa</option>									
+										<option value="mesa">Mesa 1</option>
+										<option value="mesa">Mesa 2</option>
+										<option value="mesa">Mesa 3</option>
+										<option value="mesa">Mesa 4</option>
+										<option value="mesa">Mesa 5</option>
+										<option value="mesa">Mesa 6</option>
+										<option value="mesa">Mesa 7</option>
+										<option value="mesa">Mesa 9</option>
+										<option value="mesa">Mesa 10</option>
+										<option value="mesa">Mesa 11</option>
+										<option value="mesa">Mesa 12</option>
+										
+									</select>
+								</div>
+
+								<h5 class="card-title">
+									PRODUCTOS
+								</h5>
+								<div class="alert alert-light" role="alert">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Producto</th>
+												<th class="text-center" scope="col">Precio</th>
+												<th class="text-center" scope="col">Cantidad</th>
+												<th class="text-center" scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="dtorden:${cart}">
+												<td class="text-left" th:text="${dtorden.nombre}"></td>
+												<td class="text-center" th:text="${dtorden.precio}"></td>
+												<td class="text-center" th:text="${dtorden.cantidad}"></td>
+												<td class="text-center" th:text="${dtorden.total}"></td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+
+						<div class="col-lg-3">
+							<h2 class="card-title text-center">Precio de la Orden</h2>
+
+							<ul class="list-group">
+								<li class="list-group-item text-center">
+									<h5 th:text=" 'Total: '+ ${orden.total} "> </h5>
+								</li>
+								<input type="submit" class="btn btn-dark" value="Generar"></input>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<div th:include="usuario/template_usuario.html::footer">
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>
